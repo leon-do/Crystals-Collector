@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+	
+	<div id="goal"> </div>
+	<div id="winLoss"> </div>
+	<div id="bttnDiv"></div>
+
+	<script>
+		var wins = losses = total = goal = 0;
+
+	newGame()
+
+	function newGame(){
+		$("#goal").html(generateRandom(10,20));
+		$("#winLoss").html("Win: " + wins + "   Loss: " + losses);
+		$("#bttnDiv").empty();
+		for (var i = 0; i < 4; i++){
+			$("#bttnDiv").append(
+							"<button" +
+							" data" + "=" + generateRandom(0,5) + 
+							"></button>")
+		}
+	} // newGame
+
+
+		$("#bttnDiv").on("click","button",function(){
+			total = total + parseInt($(this).attr("data"))
+
+			if (total < $("#goal").html()) {
+				alert(total)
+			}
+
+			if (total == $("#goal").html()){
+				total = 0;
+				alert("you win!");
+				wins++;
+				newGame()
+			}
+
+			if (total > $("#goal").html()){
+				total = 0;
+				alert("you lose")
+				losses++
+				newGame()
+			}
+		})
+
+
+		function generateRandom(min,max){
+			var RandomNumber = Math.floor(Math.random()*(max - min) + min)
+			return RandomNumber
+		}
+
+	</script>
+</body>
+</html>
